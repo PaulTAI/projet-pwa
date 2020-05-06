@@ -15,4 +15,18 @@ export default function Todo(page) {
         .cloneNode(true);
 
     page.appendChild(view);
+
+
+    /** add */
+   /*  const todo = {
+        id: Date.now(),
+        title: input.value,
+        synced: false,
+        updated: false,
+        done: false,
+        date: Date.now()
+      };
+  
+      const event = new CustomEvent('create-todo', { detail: todo });
+      view.dispatchEvent(event);*/
 }
