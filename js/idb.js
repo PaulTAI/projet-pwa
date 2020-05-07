@@ -10,10 +10,11 @@ export async function initDB() {
       keyPath: 'id',
       });
       // Create an index on the 'date' property of the objects.
-      store.createIndex('synced', 'synced');
-      store.createIndex('updated', 'updated');
+      store.createIndex('id', 'id');
+      store.createIndex('content', 'content');
       store.createIndex('done', 'done');
-      store.createIndex('date', 'date');
+      store.createIndex('isSync', 'isSync');
+      store.createIndex('isDeleted', 'isDeleted');
     },
   });
   return db;
@@ -38,4 +39,26 @@ export async function setTodo(data) {
 export async function getTodos() {
   const db = await initDB();
   return await db.getAll('todos');
+}
+
+export async function unsetTodo(id) {
+  const db = await initDB();
+  const tx = db.transaction('todos', 'readwrite').objectStore('todos');
+  const objectStore = await tx.get(parseInt(id));
+  objectStore.isDeleted = true;
+  return await tx.put(objectStore);
+}
+
+export async function deleteTodoIDB(id) {
+  const db = await initDB();
+  return await db.delete('todos', id);
+}
+
+export async function checkTodoIDB(isDone, id) {
+  const db = await initDB();
+  const tx = db.transaction('todos', 'readwrite').objectStore('todos');
+  const objectStore = await tx.get(parseInt(id));
+  objectStore.done = isDone;
+  objectStore.isUpdate = true;
+  return await tx.put(objectStore);
 }
