@@ -81,7 +81,6 @@ export default async function Todo(toDoPage) {
     }
 
     let asyncCheckItem = async(checkbox) => {
-        console.log(checkbox);
         let isChecked = checkbox.checked;
         let itemId = checkbox.dataset.item;
         await checkTodoIDB(isChecked, itemId);

@@ -1,31 +1,3 @@
 {
-  "todos": [
-    {
-      "id": 1,
-      "title": "aadddd",
-      "content": "aa",
-      "done": false,
-      "isDeleted": false,
-      "isUpdate": false,
-      "isSync": false
-    },
-    {
-      "id": 2,
-      "title": "bffdvd",
-      "content": "fff",
-      "done": false,
-      "isDeleted": false,
-      "isUpdate": false,
-      "isSync": false
-    },
-    {
-      "id": 3,
-      "title": "zezeffffff",
-      "content": "zeze",
-      "done": false,
-      "isDeleted": false,
-      "isUpdate": false,
-      "isSync": true
-    }
-  ]
+  "todos": []
 }

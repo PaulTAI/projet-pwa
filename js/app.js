@@ -9,7 +9,6 @@ document.addEventListener('connection-changed', async e => {
   document.offline = !e.detail;
   if (e.detail) {
     let todosIDB = await getTodos();
-    console.log(todosIDB);
     todosIDB.map(async todoIDB => {
       if(!todoIDB.isSync){
         await createTodo({...todoIDB, isSync: true});
