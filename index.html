@@ -16,47 +16,17 @@
     <link rel="modulepreload" href="/js/network.js" as="script">
     <link rel="preload" href="/css/index.css" as="style">
     <title>cc-pwa</title>
-    <!--<script>
+    <script>
         if ('serviceWorker' in navigator) {
-          window.addEventListener('load', function() {
-            let refreshing = false;
-            let newWorker = null;
-            navigator.serviceWorker.register('/service-worker.js', {
-              scope: '/'
-            }).then(function(registration) {
-              setInterval(() => {
-                console.log('Checking for new service workder');
-                registration.update();
-              }, 10 * 1000);
-    
-              if (registration.waiting && navigator.serviceWorker.controller) {
-                newWorker = registration.waiting;
-                const response = confirm('A new version of your application is awaiable, would you like to update ?');
-                if (response) newWorker.postMessage({ type: 'SKIP_WAITING' });
-              }
-    
-              registration.addEventListener('updatefound', () => {
-                console.log('Service Worker update detected');
-                newWorker = registration.installing;
-                newWorker.addEventListener('statechange', () => {
-                  if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                    const response = confirm('A new version of your application is available, would you like to update ?');
-                    if (response) newWorker.postMessage({ type: 'SKIP_WAITING' });
-                  }
-                })
-              });
-    
-              navigator.serviceWorker.addEventListener('controllerchange', () => {
-                if (refreshing) return;
-                window.location.reload();
-                refreshing = true;
-              });
+          window.addEventListener('load', function () {
+            navigator.serviceWorker.register('/service-worker.js').then(function (registration) {
+              console.log('ServiceWorker registration successful with scope: ', registration.scope);
+            }, function (err) {
+              console.log('ServiceWorker registration failed: ', err);
             });
           });
-        } else {
-          console.log('Service worker not supported !!!!!!!!');
         }
-      </script>-->
+      </script>
 </head>
 <body>
     <section id="app">
