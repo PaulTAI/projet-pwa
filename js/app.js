@@ -9,9 +9,7 @@ document.addEventListener('connection-changed', async e => {
   document.offline = !e.detail;
   if (e.detail) {
     let todosIDB = await getTodos();
-    //let todosJSONserver = await fetchTodos();
     console.log(todosIDB);
-    //console.log(todosJSONserver);
     todosIDB.map(todoIDB => {
       if(!todoIDB.isSync){
         createTodo({...todoIDB, isSync: true});
@@ -33,7 +31,6 @@ document.addEventListener('connection-changed', async e => {
 fetch('/config.json')
   .then((result) => result.json())
   .then((config) => {
-    console.log('[todo] Config loaded !!!');
     window.config = config;
 
     const app = document.querySelector('#app .outlet');
@@ -53,34 +50,13 @@ fetch('/config.json')
       }
 
       Todo(app, data);
-      /*el.addEventListener('create-todo', async ({ detail }) => {
-          console.log(detail)
-          await setTodo(detail);
-          if (!document.offline) {
-            const result = await createTodo(detail);
-            if (result !== false) {
-              detail.synced = true;
-              await setTodo(detail);
-            }
-          } else {
-            console.log('[todo] Todo created offline');
-          }
-      });*/
-      /*const result = await fetch('http://localhost:3000/todos', {
-          method: 'GET',
-          headers: {
-          'Content-Type': 'application/json',
-          },
-      });
-      const data = await result.json();*/
     });
 
     page('/todos/edit/:id', async (req) => {
-      console.log(req.params.id);
       const module = await import('./views/EditTodo.js');
       const EditTodo = module.default;
 
-      EditTodo(app);
+      EditTodo(app, req.params.id);
     });
 
     page();

@@ -1,28 +1,10 @@
 {
   "todos": [
     {
-      "id": 1,
-      "title": "fede",
-      "content": "fe",
-      "done": false,
-      "isDeleted": false,
-      "isUpdate": false,
-      "isSync": true
-    },
-    {
-      "id": 2,
-      "title": "ferg",
-      "content": "rg",
-      "done": false,
-      "isDeleted": false,
-      "isUpdate": false,
-      "isSync": true
-    },
-    {
       "id": 3,
-      "title": "zd",
-      "content": "zd",
-      "done": false,
+      "title": "rfg",
+      "content": "rg",
+      "done": true,
       "isDeleted": false,
       "isUpdate": false,
       "isSync": true

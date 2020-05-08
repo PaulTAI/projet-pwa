@@ -17,7 +17,7 @@ export default async function Todo(toDoPage) {
     const constructor = document.createElement('div');
     constructor.innerHTML = `
         <section name="Todo">
-            <h1>My awesome todo :</h1>
+            <h1>Ma Todo Liste :</h1>
             <section id="todo-list" class="todolist">
                 ${todoCard(todos)}
             </section>
@@ -25,7 +25,7 @@ export default async function Todo(toDoPage) {
                 <form id="form-add-item" class="block-add-item flex column space-between">
                     <input type="text" class="add-item-field" placeholder="Titre"/>
                     <input type="text" class="add-item-field" placeholder="Entrer une valeur dans la toList"/>
-                    <button type="submit">
+                    <button type="submit" class="cta-submit">
                         Créer
                     </button>
                 </form>

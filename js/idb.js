@@ -41,6 +41,12 @@ export async function getTodos() {
   return await db.getAll('todos');
 }
 
+export async function getTodo(id) {
+  const db = await initDB();
+  const tx = db.transaction('todos', 'readwrite').objectStore('todos');
+  return await tx.get(parseInt(id));
+}
+
 export async function unsetTodo(id) {
   const db = await initDB();
   const tx = db.transaction('todos', 'readwrite').objectStore('todos');
@@ -59,6 +65,16 @@ export async function checkTodoIDB(isDone, id) {
   const tx = db.transaction('todos', 'readwrite').objectStore('todos');
   const objectStore = await tx.get(parseInt(id));
   objectStore.done = isDone;
+  objectStore.isUpdate = true;
+  return await tx.put(objectStore);
+}
+
+export async function updateTodoIDB(item) {
+  const db = await initDB();
+  const tx = db.transaction('todos', 'readwrite').objectStore('todos');
+  const objectStore = await tx.get(parseInt(item.id));
+  objectStore.title = item.title;
+  objectStore.content = item.content;
   objectStore.isUpdate = true;
   return await tx.put(objectStore);
 }
