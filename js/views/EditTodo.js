@@ -54,6 +54,6 @@ export default async function EditTodo(EditToDoPage, itemId) {
         let value = event.currentTarget.children[1].value;
         asyncEditItem(title, value);
         e.preventDefault();
-        page("/todos");
+        //page("/todos");
     })
 }

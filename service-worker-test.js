@@ -7,7 +7,6 @@ self.addEventListener('install', function(event) {
     caches.open(cacheVersion)
       .then(function(cache) {
         return cache.addAll([
-          '/',
           '/index.html',
           '/js/app.js',
           '/js/idb.js',
@@ -22,8 +21,11 @@ self.addEventListener('install', function(event) {
           '/img/logo.webp',
           '/img/manifest/icon-192x192.png',
           '/img/manifest/icon-512x512.png',
+          '/node_modules/page/page.mjs',
+          '/node_modules/idb/build/esm/index.js',
+          '/node_modules/idb/build/esm/wrap-idb-value.js',
           '/config.json',
-          '/data/database.json'
+          '/node_modules/es-dev-server'
         ])
       })
   );
@@ -34,11 +36,21 @@ self.addEventListener('activate', event => {
 });
 
 self.addEventListener('fetch', function(event) {
+  if (event.request.method === 'GET') {
     event.respondWith(
-        caches.match(event.request).then(function(response) {
-            return response || fetch(event.request);
+      caches.match(event.request)
+        .then(function(response) {
+          return response || fetch(event.request)
+            .then(function(response) {
+              caches.open(cacheVersion)
+                return response;
+            })
         })
-    );
+        .catch(function() {
+          return caches.match('index.html');
+        })
+    )
+  }
 });
 
 /*self.addEventListener('message', function(event) {

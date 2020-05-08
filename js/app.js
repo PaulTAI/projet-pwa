@@ -10,17 +10,16 @@ document.addEventListener('connection-changed', async e => {
   if (e.detail) {
     let todosIDB = await getTodos();
     console.log(todosIDB);
-    todosIDB.map(todoIDB => {
+    todosIDB.map(async todoIDB => {
       if(!todoIDB.isSync){
-        createTodo({...todoIDB, isSync: true});
-      }
-      if(todoIDB.isDeleted){
-        deleteTodo(todoIDB.id);
-        deleteTodoIDB(todoIDB.id);
-        return;
+        await createTodo({...todoIDB, isSync: true});
       }
       if(todoIDB.isUpdate){
-        updateTodo({...todoIDB, isUpdate: false});
+        await updateTodo({...todoIDB, isUpdate: false, isSync: true});
+      }
+      if(todoIDB.isDeleted){
+        await deleteTodo(todoIDB.id);
+        await deleteTodoIDB(todoIDB.id);
       }
     })
   } else {
