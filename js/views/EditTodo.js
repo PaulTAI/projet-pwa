@@ -11,7 +11,9 @@ export default async function EditTodo(EditToDoPage, itemId) {
             <h1>Edition de mon todo "${todoItem.title}" :</h1>
             <div class="block-edit-item">
                 <form id="edit-item-form" class="edit-item-form flex column">
+                    <label for="edit-title">Titre :</label>
                     <input type="text" id="edit-title" placeholder="Titre" value="${todoItem.title}" />
+                    <label for="edit-content">Valeur :</label>
                     <input type="text" id="edit-content" placeholder="Valeur du todo" value="${todoItem.content}" />
                     <button type="submit" id="submit-edit" class="cta-submit">
                         Valider les modifications
@@ -50,8 +52,8 @@ export default async function EditTodo(EditToDoPage, itemId) {
     }
 
     document.getElementById("edit-item-form").addEventListener("submit", function(e){
-        let title = event.currentTarget.children[0].value;
-        let value = event.currentTarget.children[1].value;
+        let title = event.currentTarget.children[1].value;
+        let value = event.currentTarget.children[3].value;
         asyncEditItem(title, value);
         e.preventDefault();
         //page("/todos");

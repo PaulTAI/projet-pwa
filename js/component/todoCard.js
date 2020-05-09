@@ -12,7 +12,8 @@ export default function TodoCard(todos, async = false) {
               </p>
             </div>
             <div class="block-action-item flex column justify-center align-center">
-              <input type="checkbox" data-action="check" class="action-item check-item" data-item="${todo.id}" ${todo.done ? "checked" : null}/>
+              <label for="checkbox-${todo.id}">Valider :</label>
+              <input type="checkbox" id="checkbox-${todo.id}" data-action="check" class="action-item check-item" data-item="${todo.id}" ${todo.done ? "checked" : null}/>
               <button data-item="${todo.id}" data-action="modif" class="action-item modif-item">
                 Modifier
               </button>

@@ -23,8 +23,10 @@ export default async function Todo(toDoPage) {
             </section>
             <section class="section-add-item">
                 <form id="form-add-item" class="block-add-item flex column space-between">
-                    <input type="text" class="add-item-field" placeholder="Titre"/>
-                    <input type="text" class="add-item-field" placeholder="Entrer une valeur dans la toList"/>
+                    <label for="add-item-field-1">Titre :</label>
+                    <input type="text" id="add-item-field-1" class="add-item-field" placeholder="Titre"/>
+                    <label for="add-item-field-2">Valeur :</label>
+                    <input type="text" id="add-item-field-2" class="add-item-field" placeholder="Entrer une valeur dans la toList"/>
                     <button type="submit" class="cta-submit">
                         Créer
                     </button>
@@ -106,8 +108,8 @@ export default async function Todo(toDoPage) {
 
     document.getElementById("form-add-item").addEventListener("submit", function(event){
         event.preventDefault();
-        let title = event.currentTarget.children[0].value;
-        let value = event.currentTarget.children[1].value;
+        let title = event.currentTarget.children[1].value;
+        let value = event.currentTarget.children[3].value;
         asyncAddItem(title, value)
     });
 
@@ -133,17 +135,4 @@ export default async function Todo(toDoPage) {
             });
         })
     }
-
-    /** add */
-   /*  const todo = {
-        id: Date.now(),
-        title: input.value,
-        synced: false,
-        updated: false,
-        done: false,
-        date: Date.now()
-      };
-  
-      const event = new CustomEvent('create-todo', { detail: todo });
-      view.dispatchEvent(event);*/
 }
